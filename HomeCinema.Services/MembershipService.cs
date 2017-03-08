@@ -3,6 +3,7 @@ using HomeCinema.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,7 +40,8 @@ namespace HomeCinema.Services
                 UserId = user.ID
             };
             _userRoleRepository.Add(userRole);
-        }
+        }
+
         private bool isPasswordValid(User user, string password)
         {
             return string.Equals(_encryptionService.EncryptPassword(password,
@@ -53,7 +55,9 @@ namespace HomeCinema.Services
                 return !user.IsLocked;
             }
             return false;
-        }        public User CreateUser(string username, string email, string password, int[] roles)
+        }
+
+        public User CreateUser(string username, string email, string password, int[] roles)
         {
             var existingUser = _userRepository.GetSingleByUsername(username);
             if (existingUser != null)
@@ -100,6 +104,22 @@ namespace HomeCinema.Services
                 }
             }
             return _result.Distinct().ToList();
+        }
+        public MembershipContext ValidateUser(string username, string password)
+        {
+            var membershipCtx = new MembershipContext();
+            var user = _userRepository.GetSingleByUsername(username);
+            if (user != null && isUserValid(user, password))
+            {
+                var userRoles = GetUserRoles(user.Username);
+                membershipCtx.User = user;
+
+                var identity = new GenericIdentity(user.Username);
+                membershipCtx.Principal = new GenericPrincipal(
+                identity,
+               userRoles.Select(x => x.Name).ToArray());
+            }
+            return membershipCtx;
         }
     }
 }

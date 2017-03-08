@@ -186,6 +186,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Extensions\RequestMessageExtensions.cs" />
+    <Compile Include="Infrastructure\MessageHandlers\HomeCinemaAuthHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +244,10 @@
     <ProjectReference Include="..\HomeCinema.Data\HomeCinema.Data.csproj">
       <Project>{7526b2e2-522a-4b8c-bfd8-6fc8186059c9}</Project>
       <Name>HomeCinema.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCinema.Entities\HomeCinema.Entities.csproj">
+      <Project>{BB5AE9BC-58BC-412B-9B0A-08C073B6FBD8}</Project>
+      <Name>HomeCinema.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeCinema.Services\HomeCinema.Services.csproj">
       <Project>{20788510-3d24-4a8a-9062-bd04bdbc28ac}</Project>

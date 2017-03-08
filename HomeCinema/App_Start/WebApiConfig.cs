@@ -13,7 +13,8 @@ namespace HomeCinema
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-
+            config.MessageHandlers.Add(new HomeCinemaAuthHandler());
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.LocalOnly;
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
