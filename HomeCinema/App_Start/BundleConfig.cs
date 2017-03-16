@@ -71,7 +71,9 @@ namespace HomeCinema
             "~/content/css/toastr.css",
             "~/content/css/jquery.fancybox.css",
             "~/content/css/loading-bar.css"));
-            BundleTable.EnableOptimizations = false;
+
+            BundleTable.EnableOptimizations = false;
+
         }
     }
 }

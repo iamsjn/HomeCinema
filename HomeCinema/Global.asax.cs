@@ -14,11 +14,11 @@ namespace HomeCinema
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             Bootstrapper.Run();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            GlobalConfiguration.Configuration.EnsureInitialized();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
